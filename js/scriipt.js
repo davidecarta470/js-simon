@@ -14,7 +14,7 @@
 let arrayRandomNumbers = []
 let userNumbers = []
 let rightNumbers= []
-
+let giocovalido = false
 let risposta = document.querySelector('h1')
 // creo array con numeri random
 const numbers = setInterval(function(){
@@ -45,20 +45,28 @@ setTimeout(() =>{
     }
     i++
   }
-   
+  rightNumbers.forEach((number) => {
+    if (!isNaN(number)){
+      giocovalido=true
+    }
+  })
+
   if(rightNumbers.length>0){
     risposta.innerHTML = `
-    i numeri indovinati sono ${rightNumbers.length} e sono:
+     numeri indovinati : ${rightNumbers.length} ----->
     `
     rightNumbers.forEach((number) => {
-     risposta.innerHTML += ` : ${number} `
+     risposta.innerHTML += `  ${number}   `
 
     })
     
   }else{
     risposta.innerHTML = 'non hai indovinato nessun numero'
   }
- },7000);
+  if(!giocovalido){
+    risposta.innerHTML = 'sono state inserite delle lettere al posto dei numeri'
+  }
+},7000);
 
 
  
