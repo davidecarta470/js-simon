@@ -15,17 +15,17 @@ let arrayRandomNumbers = []
 let userNumbers = []
 let rightNumbers= []
 
-
+let risposta = document.querySelector('h1')
 // creo array con numeri random
 const numbers = setInterval(function(){
   let numeroRandom = Math.floor((Math.random()*100)+1)
   arrayRandomNumbers.push(numeroRandom)
-  document.querySelector('h1').innerHTML = numeroRandom
+  risposta.innerHTML = numeroRandom
 },1000);
 
 // interrompo il ciclo di setInterval e genero un'attesa di 3 secondi
 setTimeout(()=>{
- document.querySelector('h1').innerHTML = ''
+  risposta.innerHTML = ''
   clearInterval(numbers)
 },6000);
 
@@ -38,17 +38,26 @@ setTimeout(()=>{
 setTimeout(() =>{
   i=0;
   while(i<5){
-    let userNumber = parseInt(prompt(`inserici valore n =${i}`))
+    let userNumber = parseInt(prompt(`inserici valore n =${i + 1}`))
     userNumbers.push(userNumber)
     if (userNumbers.includes(arrayRandomNumbers[i])){
-      rightNumbers.push(arrayRandomNumbers[i])
+       rightNumbers.push(arrayRandomNumbers[i])
     }
     i++
   }
    
-  document.querySelector('h1').innerHTML = `
-  i numeri indovinati sono ${rightNumbers.length}
-  `
+  if(rightNumbers.length>0){
+    risposta.innerHTML = `
+    i numeri indovinati sono ${rightNumbers.length} e sono:
+    `
+    rightNumbers.forEach((number) => {
+     risposta.innerHTML += ` : ${number} `
+
+    })
+    
+  }else{
+    risposta.innerHTML = 'non hai indovinato nessun numero'
+  }
  },7000);
 
 
